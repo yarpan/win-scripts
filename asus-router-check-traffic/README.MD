@@ -1,8 +1,8 @@
-# 📡 Router Traffic Monitor with Alerting (Windows PowerShell)
+#  Router Traffic Monitor with Alerting (Windows PowerShell)
 
 This project allows monitoring your router’s daily internet traffic and sends alert notifications if usage exceeds a defined threshold. It runs hourly using Windows Task Scheduler.
 
-## ✅ Features
+##  Features
 
 - Retrieves traffic statistics from your router's web interface (via HTTP Basic Auth)
 - Calculates daily usage based on 00:00 baseline
@@ -11,7 +11,7 @@ This project allows monitoring your router’s daily internet traffic and sends 
 - Secrets and tokens are stored in a separate `secrets.json` file
 - Auto-registers Task Scheduler job to run hourly
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 .
@@ -20,7 +20,7 @@ This project allows monitoring your router’s daily internet traffic and sends 
 └── register_task.ps1           # Registers a scheduled task to run the main script hourly
 ```
 
-## ⚙️ Setup Instructions
+##  Setup Instructions
 
 ### 1. Clone or copy the files
 
@@ -64,13 +64,13 @@ powershell -ExecutionPolicy Bypass -File C:\Scripts\register_task.ps1
 
 This creates a scheduled task named `CheckRouterTrafficHourly` that runs hourly.
 
-## 📌 Notes
+##  Notes
 
 - Script uses **Basic Auth** — ensure HTTPS or local-only router access.
 - Traffic stats are reset daily at midnight.
 - Task Scheduler will run under the current user; make sure they have PowerShell rights.
 
-## 🧪 Testing
+##  Testing
 
 You can run the script manually to verify:
 
