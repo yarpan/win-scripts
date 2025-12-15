@@ -16,10 +16,10 @@ $checkIntervalMinutes = 60
 $thresholdGB = $secrets.thresholdGB
 
 # === Authorization header ===
-$pair = "$username:$password"
+$pair = $username + ':' + $password
 $bytes = [System.Text.Encoding]::ASCII.GetBytes($pair)
 $encoded = [Convert]::ToBase64String($bytes)
-$headers = @{ Authorization = "Basic $encoded" }
+$headers = @{ Authorization = "Basic ${encoded}" }
 
 # === Path to store 00:00 traffic snapshot ===
 $baselineFile = "$env:LOCALAPPDATA\RouterTrafficBaseline.json"
@@ -62,13 +62,15 @@ if ($current -and $baseline) {
     Write-Host "Current daily usage: $deltaGB GB"
 
     # Always send hourly update to webhook1
-    $updateCommand = "curl -X POST `"$webhook1`" -H `"Content-Type: application/json`" -d '{"usage":$deltaGB,"threshold":$thresholdGB}'"
+    $updateJson = @{usage=$deltaGB; threshold=$thresholdGB} | ConvertTo-Json -Compress
+    $updateCommand = "curl -X POST `"$webhook1`" -H `"Content-Type: application/json`" -d '$updateJson'"
     Invoke-Expression $updateCommand
 
     if ($deltaGB -gt $thresholdGB) {
         Write-Host "Threshold of $thresholdGB GB exceeded. Sending alert."
 
-        $alertCommand = "curl -X POST `"$webhook2`" -H `"Content-Type: application/json`" -d '{"alert":"threshold_exceeded","usage":$deltaGB,"threshold":$thresholdGB}'"
+        $alertJson = @{alert="threshold_exceeded"; usage=$deltaGB; threshold=$thresholdGB} | ConvertTo-Json -Compress
+        $alertCommand = "curl -X POST `"$webhook2`" -H `"Content-Type: application/json`" -d '$alertJson'"
         Invoke-Expression $alertCommand
     }
 }
