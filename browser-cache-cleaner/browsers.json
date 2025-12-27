@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Google Chrome",
+        "process": "chrome",
+        "profileRoot": "%LOCALAPPDATA%\\Google\\Chrome\\User Data"
+    },
+    {
+        "name": "Google Chrome Dev",
+        "process": "chrome",
+        "profileRoot": "%LOCALAPPDATA%\\Google\\Chrome Dev\\User Data"
+    },
+    {
+        "name": "Google Chrome Canary",
+        "process": "chrome",
+        "profileRoot": "%LOCALAPPDATA%\\Google\\Chrome SxS\\User Data"
+    },
+    {
+        "name": "Microsoft Edge",
+        "process": "msedge",
+        "profileRoot": "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data"
+    },
+    {
+        "name": "Mozilla Firefox",
+        "process": "firefox",
+        "profileRoot": "%APPDATA%\\Mozilla\\Firefox"
+    },
+    {
+        "name": "Firefox Developer Edition",
+        "process": "firefox",
+        "profileRoot": "%APPDATA%\\Mozilla\\Firefox"
+    }
+]
